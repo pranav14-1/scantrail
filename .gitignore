@@ -2,6 +2,7 @@
 *.class
 *.log
 *.pyc
+__pycache__/
 *.swp
 .DS_Store
 .atom/
@@ -18,11 +19,6 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
@@ -32,16 +28,31 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+
+# Secrets & Local Environment
 .env
+.env.*
+!.env.example
+*.pem
+*.key
 
-# Symbolication related
+# Local Data, Uploads, and Generated Reports
+temp_uploads/
+reports/
+*.pdf
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Symbolication & Obfuscation
 app.*.symbols
-
-# Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
+# Android Studio / Gradle artifacts
 /android/app/debug
 /android/app/profile
 /android/app/release
-/backend/
+.gradle/
+local.properties
