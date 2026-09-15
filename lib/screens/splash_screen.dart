@@ -59,15 +59,20 @@ class _SplashScreenState extends State<SplashScreen> {
             const Icon(
               Icons.agriculture,
               size: 120,
+              Icons.add_road,
+              size: 110,
               color: Colors.white,
             ),
             const SizedBox(height: 24),
+            const SizedBox(height: 20),
             Text(
               'AgriSense',
+              'ScanTrail',
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
+                letterSpacing: 1.2,
                 shadows: [
                   Shadow(
                     blurRadius: 10.0,
@@ -75,6 +80,15 @@ class _SplashScreenState extends State<SplashScreen> {
                     offset: const Offset(2.0, 2.0),
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Spatial-Temporal Road Infrastructure Monitoring',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.white70,
+                letterSpacing: 0.5,
               ),
             ),
           ],

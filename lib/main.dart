@@ -67,6 +67,7 @@ class AgriSenseApp extends StatelessWidget {
       builder: (context, languageProvider, child) {
         return MaterialApp(
           title: 'AgriSense',
+          title: 'ScanTrail',
           theme: AppTheme.lightTheme,
           debugShowCheckedModeBanner: false,
           locale: languageProvider.appLocale,

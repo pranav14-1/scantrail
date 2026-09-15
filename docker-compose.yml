@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgis:
+    image: postgis/postgis:15-3.3
+    container_name: scantrail-postgis
+    environment:
+      POSTGRES_DB: scantrail_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d scantrail_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: scantrail-api
+    depends_on:
+      postgis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:postgrespassword@postgis:5432/scantrail_db
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      MQTT_HOSTNAME: ${MQTT_HOSTNAME:-localhost}
+      MQTT_PORT: ${MQTT_PORT:-1883}
+      TEMP_UPLOADS_DIR: temp_uploads
+      REPORTS_DIR: reports
+    ports:
+      - "8000:8000"
+    volumes:
+      - reports_data:/app/reports
+      - uploads_data:/app/temp_uploads
+    restart: unless-stopped
+
+volumes:
+  postgis_data:
+  reports_data:
+  uploads_data:
+
